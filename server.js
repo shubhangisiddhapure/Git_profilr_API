@@ -7,8 +7,9 @@ app.use(express.json({extended:false}));
 //connecte database
 connectDB();
 
-app.get('/',(req,res)=>res.send("API Running"));
 // defien routes
+const auth=require('./route/auth.js')
+app.use('/api',auth)
 const user = require('./route/user.js')
 app.use('/api',user)
 

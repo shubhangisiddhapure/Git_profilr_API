@@ -20,7 +20,7 @@ router.post('/user',async(req,res)=>{
         // }else{
         //     return res.send({err})
         // }
-        const {Name,email,password}=req.body;
+        const {name,email,password}=req.body;
         try{
             //see user exite
             let user = await User.findOne({email });
@@ -34,7 +34,7 @@ router.post('/user',async(req,res)=>{
                 d:'mm'
             })
             user = new User({
-                Name,
+                name,
                 email,
                 avatar,
                 password
@@ -52,7 +52,8 @@ router.post('/user',async(req,res)=>{
                 }
             }
             jwt.sign(payload,
-                config.jwtSecret,(err,token)=>{
+                config.jwtSecret,
+                {expiresIn:360000},(err,token)=>{
                     if(err)throw err;
                     res.json({token});
                 });

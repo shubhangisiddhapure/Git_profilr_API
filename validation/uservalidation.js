@@ -18,11 +18,11 @@ function userValidation(user) {
   
     const UserSchema = Joi.object().keys({
    
-    Name: Joi.string().required(true),
-    email:Joi.string().required(true),
+    name: Joi.string().required(true), 
+    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
     password:Joi.string().required(true),
     avatar:Joi.string().optional(),
-    Date: Joi.date().optional()
+    date: Joi.date().optional()
     })
     return validateObj(user,UserSchema)
 }
