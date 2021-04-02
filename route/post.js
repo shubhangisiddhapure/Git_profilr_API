@@ -121,7 +121,10 @@ router.put("/unlike/:id",auth,async(req,res)=>{
         }
 
         //remove like
-        const removeIndex=post.likes.map(like=>like.user.toString().indexOf(req.user.id));
+        const removeIndex=post.likes
+        .map(like=>like.user.toString()
+        .indexOf(req.user.id));
+
         post.likes.splice(removeIndex,1);
 
         await post.save()
@@ -164,5 +167,40 @@ router.post('/comment/:id',[auth,
         console.log(err)
         res.status(500).send('sever err')
     } 
+})
+
+
+
+//delete comment of particular post
+router.delete("/comment/:id/:comment_id",auth,async(req,res)=>{
+    try{
+        const post= await Post.findById(req.params.id);
+        //pull out comment
+
+        const comment=post.comments.find(comment => comment.id === req.params.comment_id)
+
+        //Make sure comment exists
+        if(!comment){
+            return res.status(404).json({msg:"Comment does not exists"})
+        }
+
+        //check user 
+        if(comment.user.toString() !== req.user.id){
+            return res.status(401).json({msg:"user not authorized"})    
+        }
+     //remove comment
+     const removeIndex=post.comments
+     .map(comment=>comment.user.toString()
+     .indexOf(req.user.id));
+     
+     post.comments.splice(removeIndex,1);
+
+     await post.save()
+     res.json(post.comments)
+
+    }catch(err){
+        console.log(err)
+        res.status(500).send('Sever error')
+    }
 })
 module.exports=router
