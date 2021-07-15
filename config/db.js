@@ -6,12 +6,12 @@ const db=config.mongooURI
 const connectDB = async () => {
     try{
         
-        await moongoose.connect(db,{
-            useNewUrlParser:true,
-            useCreateIndex:true,
-            useFindAndModify:false
+        await moongoose.connect(db, {
+          useNewUrlParser: true,
+          useCreateIndex: true,
+          useFindAndModify: false,
+          useUnifiedTopology: true,
         });
-
         console.log('mongooDB connected')
 
     }
