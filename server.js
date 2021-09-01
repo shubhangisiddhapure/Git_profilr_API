@@ -16,7 +16,7 @@ app.use('/api',auth)
 const user = require('./route/user.js')
 app.use('/api',user)
 const profile=require('./route/profile.js')
-app.use('/api',profile)
+app.use('/api/profile',profile)
 const post=require('./route/post.js')
 app.use('/api',post)
 // listen for requests

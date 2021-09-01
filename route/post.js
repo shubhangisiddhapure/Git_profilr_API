@@ -90,7 +90,7 @@ router.delete('/post/:id',auth,async (req,res)=>{
 })
 
 //add like
-router.put("/like/:id",auth,async(req,res)=>{
+router.put("post/like/:id",auth,async(req,res)=>{
     try{
         const post= await Post.findById(req.params.id);
 
@@ -111,7 +111,7 @@ router.put("/like/:id",auth,async(req,res)=>{
 
 
 //do unlike
-router.put("/unlike/:id",auth,async(req,res)=>{
+router.put("post/unlike/:id",auth,async(req,res)=>{
     try{
         const post= await Post.findById(req.params.id);
 

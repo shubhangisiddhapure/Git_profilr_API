@@ -8,7 +8,7 @@ const config=require("../config/config.json")
 const validation=require("../validation/uservalidation.js")
 const uservalidation=validation.userValidation
 
-router.post('/user',async(req,res)=>{
+router.post('/users',async(req,res)=>{
         let [result, data]=uservalidation(req.body)
         if(!result) return res.status(404).json({data})
 
